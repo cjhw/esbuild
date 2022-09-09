@@ -31,7 +31,9 @@ module.exports = () => ({
               } else if (res.statusCode === 200) {
                 // 响应成功
                 let chunks = []
-                res.on('data', (chunk) => chunks.push(chunk))
+                res.on('data', (chunk) => {
+                  chunks.push(chunk)
+                })
                 res.on('end', () => resolve(Buffer.concat(chunks)))
               } else {
                 reject(new Error(`GET ${url} failed: status ${res.statusCode}`))
